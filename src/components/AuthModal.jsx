@@ -8,6 +8,8 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
     if (!isOpen) return null;
 
     const handleSubmit = async (e) => {
@@ -23,14 +25,14 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
                 formData.append('username', email);
                 formData.append('password', password);
 
-                response = await fetch('http://127.0.0.1:8000/auth/login', {
+                response = await fetch(`${API_URL}/auth/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: formData.toString(),
                 });
             } else {
                 // JSON for Signup
-                response = await fetch('http://127.0.0.1:8000/auth/signup', {
+                response = await fetch(`${API_URL}/auth/signup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, name: email.split('@')[0], password }),
@@ -47,7 +49,7 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
             localStorage.setItem('access_token', data.access_token);
 
             // Fetch user info
-            const userResponse = await fetch('http://127.0.0.1:8000/auth/me', {
+            const userResponse = await fetch(`${API_URL}/auth/me`, {
                 headers: { 'Authorization': `Bearer ${data.access_token}` }
             });
 
@@ -59,7 +61,11 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
             onLogin(userData);
 
         } catch (err) {
-            setError(err.message);
+            if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+                setError('Cannot connect to server. Please check if the backend is running and accessible.');
+            } else {
+                setError(err.message || 'An unexpected error occurred');
+            }
         } finally {
             setLoading(false);
         }
@@ -70,7 +76,7 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
         setLoading(true);
         try {
             // Simulated OAuth flow
-            const response = await fetch('http://127.0.0.1:8000/auth/google/login', {
+            const response = await fetch(`${API_URL}/auth/google/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token: "simulated_token_xyz", email: "user@gmail.com", name: "Google User" })
@@ -84,7 +90,7 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
 
             localStorage.setItem('access_token', data.access_token);
 
-            const userResponse = await fetch('http://127.0.0.1:8000/auth/me', {
+            const userResponse = await fetch(`${API_URL}/auth/me`, {
                 headers: { 'Authorization': `Bearer ${data.access_token}` }
             });
 
@@ -92,7 +98,11 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
             onLogin(userData);
 
         } catch (err) {
-            setError(err.message);
+            if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+                setError('Cannot connect to server. Please check if the backend is running and accessible.');
+            } else {
+                setError(err.message || 'An unexpected error occurred');
+            }
         } finally {
             setLoading(false);
         }

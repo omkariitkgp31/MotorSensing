@@ -7,6 +7,8 @@ const Login = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
@@ -18,7 +20,7 @@ const Login = () => {
             formData.append('username', email);
             formData.append('password', password);
 
-            const response = await fetch('http://127.0.0.1:8000/auth/login', {
+            const response = await fetch(`${API_URL}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: formData.toString(),
@@ -36,7 +38,11 @@ const Login = () => {
             window.location.href = "/"; // Temporary redirect for standalone page
 
         } catch (err) {
-            setError(err.message);
+            if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+                setError('Cannot connect to server. Please check if the backend is running and accessible.');
+            } else {
+                setError(err.message || 'An unexpected error occurred');
+            }
         } finally {
             setLoading(false);
         }
@@ -46,7 +52,7 @@ const Login = () => {
         setError(null);
         setLoading(true);
         try {
-            const response = await fetch('http://127.0.0.1:8000/auth/google/login', {
+            const response = await fetch(`${API_URL}/auth/google/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token: "simulated_token_xyz", email: "user@gmail.com", name: "Google User" })
@@ -62,7 +68,11 @@ const Login = () => {
             window.location.href = "/"; // Temporary redirect 
 
         } catch (err) {
-            setError(err.message);
+            if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+                setError('Cannot connect to server. Please check if the backend is running and accessible.');
+            } else {
+                setError(err.message || 'An unexpected error occurred');
+            }
         } finally {
             setLoading(false);
         }
