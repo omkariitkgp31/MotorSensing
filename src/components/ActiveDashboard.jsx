@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
 
 const ActiveDashboard = ({ user, onLogout }) => {
     const [file, setFile] = useState(null);
@@ -9,6 +11,15 @@ const ActiveDashboard = ({ user, onLogout }) => {
         e.preventDefault();
         setIsDragging(true);
     };
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            if (!currentUser) {
+                window.location = "/";
+            }
+        });
+        return () => unsubscribe();
+    }, []);
 
     const handleDragLeave = () => {
         setIsDragging(false);

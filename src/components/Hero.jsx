@@ -43,25 +43,7 @@ const Hero = () => {
 
                 {/* Left Content */}
                 <div className="animate-fade-in" style={{ zIndex: 1 }}>
-                    <div className="glass-panel" style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        padding: '0.25rem 1rem',
-                        borderRadius: '2rem',
-                        marginBottom: '1.5rem',
-                        fontSize: '0.875rem',
-                        fontWeight: 500,
-                        border: '1px solid rgba(6, 182, 212, 0.3)'
-                    }}>
-                        <span style={{
-                            width: '8px', height: '8px',
-                            borderRadius: '50%',
-                            background: 'var(--accent-primary)',
-                            marginRight: '0.5rem',
-                            boxShadow: '0 0 10px var(--accent-primary)'
-                        }} />
-                        Academic Engineering Project
-                    </div>
+
 
                     <h1 style={{ fontSize: '4rem', marginBottom: '1.5rem', letterSpacing: '-1px' }}>
                         <span style={{ display: 'block' }}>AI Powered</span>
@@ -78,14 +60,6 @@ const Hero = () => {
                         </p>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                        <button className="button-primary" style={{ padding: '1rem 2rem', fontSize: '1rem' }}>
-                            View System Architecture
-                        </button>
-                        <button className="button-secondary" style={{ padding: '1rem 2rem', fontSize: '1rem' }}>
-                            Explore Model
-                        </button>
-                    </div>
                 </div>
 
                 {/* Right Visual (Using the generated AI Motor Image) */}
@@ -110,46 +84,7 @@ const Hero = () => {
                         />
                     </div>
 
-                    {/* Floating Element: Live Diagnosis */}
-                    <div className="glass-panel" style={{
-                        position: 'absolute',
-                        bottom: '20px',
-                        left: '-30px',
-                        padding: '1rem 1.5rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1rem',
-                        animation: 'fadeIn 1s ease forwards, float 6s ease-in-out infinite',
-                        border: '1px solid rgba(6, 182, 212, 0.4)',
-                        boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
-                    }}>
-                        <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: 'rgba(6, 182, 212, 0.2)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-                        </div>
-                        <div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Live Status</div>
-                            <div style={{ fontSize: '1rem', fontWeight: 600, color: '#f8fafc' }}>Healthy Operation</div>
-                        </div>
-                    </div>
 
-                    {/* Floating Element: Confidence Score */}
-                    <div className="glass-panel" style={{
-                        position: 'absolute',
-                        top: '40px',
-                        right: '-20px',
-                        padding: '1rem 1.5rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '1rem',
-                        animation: 'fadeIn 1s ease forwards, float 7s ease-in-out infinite reverse',
-                        border: '1px solid rgba(139, 92, 246, 0.4)',
-                        boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
-                    }}>
-                        <div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>AI Confidence</div>
-                            <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--accent-secondary)' }}>99.8%</div>
-                        </div>
-                    </div>
                 </div>
             </div>
 

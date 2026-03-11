@@ -19,9 +19,7 @@ const Navbar = ({ user, onLoginClick, onLogout }) => {
     ] : [
         { name: 'Home', href: '#home' },
         { name: 'Problem', href: '#problem' },
-        { name: 'Methodology', href: '#methodology' },
-        { name: 'Architecture', href: '#architecture' },
-        { name: 'Results', href: '#results' }
+        { name: 'Methodology', href: '#methodology' }
     ];
 
     return (
