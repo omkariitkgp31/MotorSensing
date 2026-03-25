@@ -13,6 +13,9 @@ const Navbar = ({ user, onLoginClick, onLogout }) => {
     }, []);
 
     const navLinks = user ? [
+        { name: 'Home', href: '#home' },
+        { name: 'Problem', href: '#problem' },
+        { name: 'Methodology', href: '#methodology' },
         { name: 'Dashboard', href: '#dashboard' },
         { name: 'History', href: '#history' },
         { name: 'Settings', href: '#settings' }
@@ -41,7 +44,7 @@ const Navbar = ({ user, onLoginClick, onLogout }) => {
                 borderBottom: scrolled ? '1px solid var(--border-color)' : 'none'
             }}
         >
-            <div className="flex-center" style={{ gap: '0.75rem' }}>
+            <a href="#home" className="flex-center" style={{ gap: '0.75rem', textDecoration: 'none', color: 'inherit' }}>
                 <div className="glow-border" style={{
                     width: '36px',
                     height: '36px',
@@ -59,7 +62,7 @@ const Navbar = ({ user, onLoginClick, onLogout }) => {
                 <span style={{ fontSize: '1.25rem', fontWeight: 800, fontFamily: 'Outfit', letterSpacing: '-0.5px' }}>
                     Motor<span className="gradient-text">Sense AI</span>
                 </span>
-            </div>
+            </a>
 
             <div className="desktop-nav flex-center" style={{ gap: '2rem' }}>
                 {navLinks.map((link) => (

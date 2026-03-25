@@ -61,15 +61,18 @@ function App() {
       />
 
       <main>
-        {user ? (
+        {currentHash === '#home' && <Hero />}
+        {currentHash === '#problem' && <Problem />}
+        {currentHash === '#methodology' && <Methodology />}
+        
+        {/* Authenticated routes */}
+        {user && ['#dashboard', '#history', '#settings'].includes(currentHash) && (
           <ActiveDashboard user={user} onLogout={handleLogout} />
-        ) : (
-          <>
-            {/* The main unwrapped landing page content for non-logged-in users */}
-            {currentHash === '#home' && <Hero />}
-            {currentHash === '#problem' && <Problem />}
-            {currentHash === '#methodology' && <Methodology />}
-          </>
+        )}
+
+        {/* Default route for authenticated users without a specific valid hash */}
+        {user && !['#home', '#problem', '#methodology', '#dashboard', '#history', '#settings'].includes(currentHash) && (
+          <ActiveDashboard user={user} onLogout={handleLogout} />
         )}
       </main>
 
